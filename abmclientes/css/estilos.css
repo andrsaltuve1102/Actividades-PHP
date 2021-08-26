@@ -1,0 +1,13 @@
+
+.fa-plus{
+    border-radius: 30px;
+	border: 1px lightseagreen;
+    background-color: #007bff;
+    font-size: 30px;    
+    color: white;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    padding: 10px 10px
+}
+
