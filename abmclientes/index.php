@@ -107,21 +107,21 @@ if ($id != "" && isset($_REQUEST["do"]) && $_REQUEST["do"] == "eliminar") {
                         <?php endif;?>
                         <div class="col-12 form-group">
                             <label for="txtDni">DNI: *</label>
-                            <input type="text" id="txtDni" name="txtDni" class="form-control" required value="<?php echo isset($aClientes[$id]) ? $aClientes[$id]["dni"] : "" ?>">
+                            <input type="text" id="txtDni" name="txtDni" class="form-control" required value="<?php echo isset($aClientes[$id]["dni"]) ? $aClientes[$id]["dni"] : "" ?>">
                         </div>
                         <div class="col-12 form-group">
                             <label for="txtNombre">Nombre: *</label>
-                            <input type="text" id="txtNombre" name="txtNombre" class="form-control" required value="<?php echo isset($aClientes[$id]) ? $aClientes[$id]["nombre"] : "" ?>
+                            <input type="text" id="txtNombre" name="txtNombre" class="form-control" required value="<?php echo isset($aClientes[$id]["nombre"]) ? $aClientes[$id]["nombre"] : "" ?>
 ">
                         </div>
                         <div class="col-12 form-group">
                             <label for="txtTelefono">Teléfono:</label>
-                            <input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="<?php echo isset($aClientes[$id]) ? $aClientes[$id]["telefono"] : "" ?>
+                            <input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="<?php echo isset($aClientes[$id]["telefono"]) ? $aClientes[$id]["telefono"] : "" ?>
 ">
                         </div>
                         <div class="col-12 form-group">
                             <label for="txtCorreo">Correo: *</label>
-                            <input type="text" id="txtCorreo" name="txtCorreo" class="form-control" required value="<?php echo isset($aClientes[$id]) ? $aClientes[$id]["correo"] : "" ?>
+                            <input type="text" id="txtCorreo" name="txtCorreo" class="form-control" required value="<?php echo isset($aClientes[$id]["correo"]) ? $aClientes[$id]["correo"] : "" ?>
 ">
                         </div>
                         <div class="col-12 form-group">
