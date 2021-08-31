@@ -4,19 +4,19 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 ini_set('error_reporting', E_ALL);
 
-if(file_exists("archivo.txt")){
+if (file_exists("archivo.txt")) {
     //Leer el json del archivo
     $jsonClientes = file_get_contents("archivo.txt");
+
     //Convertir el json a un array $aClientes
     $aClientes = json_decode($jsonClientes, true);
-
 } else {
     $aClientes = array();
 }
 
-$id = isset($_REQUEST["id"]) && $_REQUEST["id"] >= 0? $_REQUEST["id"] : ""; 
+$id = isset($_REQUEST["id"]) && $_REQUEST["id"] >= 0 ? $_REQUEST["id"] : "";
 
-if($_POST){
+if ($_POST) {
     $dni = trim($_REQUEST["txtDni"]);
     $nombre = trim($_REQUEST["txtNombre"]);
     $telefono = trim($_REQUEST["txtTelefono"]);
@@ -31,14 +31,14 @@ if($_POST){
         move_uploaded_file($archivo_tmp, "imagenes/$nuevoNombre");
     }
 
-    if($id != ""){ //Estoy editando un cliente
+    if ($id != "") { //Estoy editando un cliente
         //Si no se subio la imagen, mantengo el nombre actual que ya existía de la imagen
-         if ($_FILES["archivo"]["error"] !== UPLOAD_ERR_OK) {
+        if ($_FILES["archivo"]["error"] !== UPLOAD_ERR_OK) {
             $nuevoNombre = $aClientes[$id]["imagen"];
-         } else {
+        } else {
             //Si viene la imagen, elimino la imagen anterior y guardo el nombre de la nueva imagen
-            unlink("imagenes/".$aClientes[$id]["imagen"]); //elimina un archivo
-         }
+            unlink("imagenes/" . $aClientes[$id]["imagen"]); //elimina un archivo
+        }
 
         //Actualiza un cliente existente
         $aClientes[$id] = array(
@@ -48,6 +48,7 @@ if($_POST){
             "correo" => $correo,
             "imagen" => $nuevoNombre
         );
+        
     } else { //Es un nuevo cliente
         //Inserta un nuevo cliente
         $aClientes[] = array(
@@ -56,19 +57,17 @@ if($_POST){
             "telefono" => $telefono,
             "correo" => $correo,
             "imagen" => $nuevoNombre
-         );
-
+        );
     }
     //Convertir el array a json
     $jsonClientes = json_encode($aClientes);
 
     //Guardar el json en un archivo llamado archivo.txt
     file_put_contents("archivo.txt", $jsonClientes);
-
 }
 
 if ($id != "" && isset($_REQUEST["do"]) && $_REQUEST["do"] == "eliminar") {
-    unlink("imagenes/".$aClientes[$id]["imagen"]);
+    unlink("imagenes/" . $aClientes[$id]["imagen"]);
     //Elimina el cliente del array
     unset($aClientes[$id]);
     //Actualizar el archivo con el nuevo array de aClientes
@@ -80,6 +79,7 @@ if ($id != "" && isset($_REQUEST["do"]) && $_REQUEST["do"] == "eliminar") {
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,6 +89,7 @@ if ($id != "" && isset($_REQUEST["do"]) && $_REQUEST["do"] == "eliminar") {
     <link rel="stylesheet" href="css/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
+
 <body>
     <div class="container">
         <div class="row">
@@ -100,11 +101,11 @@ if ($id != "" && isset($_REQUEST["do"]) && $_REQUEST["do"] == "eliminar") {
             <div class="col-6">
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="row">
-                        <?php if (isset($msg) && $msg != ""): ?>
-                        <div class="alert alert-success" role="alert">
-                            <?php echo $msg; ?>
-                        </div>
-                        <?php endif;?>
+                        <?php if (isset($msg) && $msg != "") : ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo $msg; ?>
+                            </div>
+                        <?php endif; ?>
                         <div class="col-12 form-group">
                             <label for="txtDni">DNI: *</label>
                             <input type="text" id="txtDni" name="txtDni" class="form-control" required value="<?php echo isset($aClientes[$id]["dni"]) ? $aClientes[$id]["dni"] : "" ?>">
@@ -148,7 +149,7 @@ if ($id != "" && isset($_REQUEST["do"]) && $_REQUEST["do"] == "eliminar") {
                     </tr>
                     <?php
 
-                    foreach ($aClientes as $pos => $cliente): ?>
+                    foreach ($aClientes as $pos => $cliente) : ?>
                         <tr>
                             <td><img src="imagenes/<?php echo $cliente["imagen"]; ?>" class="img-thumbnail"></td>
                             <td><?php echo $cliente["dni"]; ?></td>
@@ -159,11 +160,12 @@ if ($id != "" && isset($_REQUEST["do"]) && $_REQUEST["do"] == "eliminar") {
                                 <a href="index.php?id=<?php echo $pos; ?>&do=eliminar"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
-                    <?php endforeach;?>
+                    <?php endforeach; ?>
                 </table>
                 <a href="index.php"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
 </body>
+
 </html>
