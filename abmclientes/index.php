@@ -24,20 +24,21 @@ if($_POST){
     $imagen = "";
 
     if ($_FILES["archivo"]["error"] === UPLOAD_ERR_OK) { //este if nos dice si se subio o no una imagen
-        $nombre = date("Ymdhmsi");
+        $nombreAleatorio = date("Ymdhmsi");
         $archivo_tmp = $_FILES["archivo"]["tmp_name"];
         $nombreArchivo = $_FILES["archivo"]["name"];
         $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
-        move_uploaded_file($archivo_tmp, "imagenes / $nombre .$extension");
+        $imagen = "$nombre . $extension";
+        move_uploaded_file($archivo_tmp, "imagenes/$imagen");
     }
 
     if($id != ""){ //Estoy editando un cliente
         //Si no se subio la imagen, mantengo el nombre actual que ya existía de la imagen
          if ($_FILES["archivo"]["error"] !== UPLOAD_ERR_OK) {
-            $nuevoNombre = $aClientes[$id]["imagen"];
+            $imagen = $aClientes[$id]["imagen"];
          } else {
             //Si viene la imagen, elimino la imagen anterior y guardo el nombre de la nueva imagen
-            unlink("imagenes/".$aClientes[$id]["imagen"]); //elimina un archivo
+            unlink("imagenes/". $aClientes[$id]["imagen"]); //elimina un archivo
          }
 
         //Actualiza un cliente existente
@@ -146,9 +147,7 @@ if ($id != "" && isset($_REQUEST["do"]) && $_REQUEST["do"] == "eliminar") {
                         <th>Correo</th>
                         <th>Acciones</th>
                     </tr>
-                    <?php
-
-                    foreach ($aClientes as $pos => $cliente): ?>
+                    <?php foreach ($aClientes as $pos => $cliente): ?>
                         <tr>
                             <td><img src="imagenes/<?php echo $cliente["imagen"]; ?>" class="img-thumbnail"></td>
                             <td><?php echo $cliente["dni"]; ?></td>

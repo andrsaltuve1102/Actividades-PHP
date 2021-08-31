@@ -1,1 +1,1 @@
-[{"dni":"96014609","nombre":"ANDRES EDUARDO ALTUVE PEREZ","telefono":"91173613310","correo":"andrsaltuve1102@gmail.com","imagen":null}]
+[{"dni":"96014609","nombre":"ANDRES EDUARDO ALTUVE PEREZ","telefono":"91173613310","correo":"andrsaltuve1102@gmail.com","imagen":"ANDRES EDUARDO ALTUVE PEREZ . jpg"},{"dni":"96034623","nombre":"EMILY LOBO","telefono":"91173613291","correo":"danirvs.96@gmail.com","imagen":"EMILY LOBO . jpg"}]
