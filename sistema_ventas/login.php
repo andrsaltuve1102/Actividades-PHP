@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+if($_POST){
+	//Comprobamos que el usuario sea admin y la clave sea admin123
+	$usuario = trim($_REQUEST["txtUsuario"]); //trim elimina espacios de los laterales
+	$clave = trim($_REQUEST["txtClave"]);
+
+  if($usuario == "admin" && $clave =="admin123"){
+    $_SESSION["nombre"] = "Andres";
+    header("Location: index.php");
+  } else {
+
+    $msg = "Usuario o clave incorrecto";
+  }
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -46,10 +66,10 @@
 					</div>
 				  <?php endif; ?>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="txtUsuario" name="txtUsuario" aria-describedby="emailHelp" placeholder="Usuario" value="andrsaltuve1102">
+                      <input type="text" class="form-control form-control-user" id="txtUsuario" name="txtUsuario" aria-describedby="emailHelp" placeholder="Usuario" value="admin">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="txtClave" name="txtClave" placeholder="Clave" value="">
+                      <input type="password" class="form-control form-control-user" id="txtClave" name="txtClave" placeholder="Clave" value="admin123">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
