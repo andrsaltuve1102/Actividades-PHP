@@ -45,6 +45,14 @@ class Alumno extends Persona
         $this->nota_proyecto = 0.0;
     }
 
+    public function __get($propiedad) {
+        return $this->$propiedad;
+    }
+
+    public function __set($propiedad, $valor) {
+        $this->$propiedad = $valor;
+    }
+
     public function imprimir(){
         echo "DNI: " . $this->dni . "<br>";
         echo "Nombre: " . $this->nombre . "<br>";
