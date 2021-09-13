@@ -3,17 +3,17 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-class Persona {
+abstract class Persona {
     protected $dni;
     protected $nombre;
     protected $correo;
-    protected $celular;
+    protected $telefono;
 
-    public function __construct($dni, $nombre, $correo, $celular) {
+    public function __construct($dni, $nombre, $correo, $telefono) {
         $this->dni = $dni;
         $this->nombre = $nombre;
         $this->correo = $correo;
-        $this->celular = $celular;
+        $this->telefono = $telefono;
     }
 
     public function __get($propiedad) {
@@ -30,8 +30,8 @@ class Entrenador extends Persona{
     
     private $aClases;
 
-     public function __construct($dni, $nombre, $correo, $celular) {
-        parent::__construct($dni, $nombre, $correo, $celular);//este es el constructor de la clase persona
+     public function __construct($dni, $nombre, $correo, $telefono) {
+        parent::__construct($dni, $nombre, $correo, $telefono);//este es el constructor de la clase persona
         $this->aClases = array();
     }
 
@@ -53,8 +53,8 @@ class Alumno extends Persona {
     private $bAptoFisico;
     private $presentismo;
 
-    public function __construct($dni, $nombre, $correo, $celular, $fechaNac) {
-        parent::__construct($dni, $nombre, $correo, $celular);
+    public function __construct($dni, $nombre, $correo, $telefono, $fechaNac) {
+        parent::__construct($dni, $nombre, $correo, $telefono);
         $this->fechaNac = $fechaNac;
         $this->peso = 0.0;
         $this->altura = 0.0;
@@ -104,13 +104,13 @@ class Clase{
     }
 
     public function imprimirListado(){
-        echo "<table class='table table-bordered table-striped table-hover'>";
-        echo "<tr><th class='table-dark text-center' colspan='4'>Clase: " . $this->nombre . "</th></tr>";
+        echo "<table class='table table-bordered>";
+        echo "<tr><th class='table-dark text-center' >Clase: " . $this->nombre . "</th></tr>";
         echo "<tr><th colspan='2'>Entrenador:</th><td colspan='2'>" . $this->entrenador->nombre . "</td></tr>";
         echo "<tr><th colspan='4'>Alumnos inscritos:</th></tr>";
-        echo "<tr><th>DNI</th><th>Nombre</th><th>Correo</th><th>Celular</th>";
+        echo "<tr><th>DNI</th><th>Nombre</th><th>Correo</th><th>telefono</th>";
         foreach($this->aAlumnos as $alumno){
-            echo "<tr><td>" . number_format($alumno->dni, 0, ",", ".") . "</td><td>" . $alumno->nombre . "</td><td>" . $alumno->correo . "</td><td>" . $alumno->celular . "</td></tr>"; 
+            echo "<tr><td>" . number_format($alumno->dni, 0, ",", ".") . "</td><td>" . $alumno->nombre . "</td><td>" . $alumno->correo . "</td><td>" . $alumno->telefono . "</td></tr>"; 
         }
         echo "</table>";
     }
